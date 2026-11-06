@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#101d2d">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="description" content="Un piccolo regalo di Natale, fatto con amore. Aprilo per scoprire la sorpresa.">
+  <title>Una sorpresa sotto l'albero ✨</title>
+  <style>
+    :root{
+      color-scheme: light;
+      --night:#101d2d; --night-light:#21354b; --cream:#fff9ee; --paper:#fffdf6;
+      --ink:#233347; --muted:#69717a; --red:#a43b49; --gold:#b98748; --gold-light:#f1d7a4;
+      --forest:#27594b; --soft:#eae0ce;
+    }
+    *,*::before,*::after{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0; min-height:100vh; min-height:100svh; color:var(--ink);
+      font-family: ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+      background:
+        radial-gradient(circle at 17% 18%,rgba(197,148,93,.15),transparent 28%),
+        radial-gradient(circle at 83% 70%,rgba(83,119,133,.19),transparent 30%),
+        linear-gradient(146deg,#182b3e 0%,#101d2d 53%,#0d1927 100%);
+      overflow-x:hidden;
+    }
+    body::before{
+      content:""; pointer-events:none; position:fixed; inset:0; opacity:.31; z-index:0;
+      background-image: radial-gradient(#e8d1a0 0.75px, transparent .8px),radial-gradient(#fff 0.7px, transparent .8px);
+      background-size: 91px 103px,137px 139px; background-position:16px 23px,55px 90px;
+    }
+    [hidden]{display:none !important}
+    button{font:inherit}
+    button:focus-visible{outline:3px solid #d29e53;outline-offset:5px}
+    .snow{position:fixed;inset:0;pointer-events:none;z-index:8;overflow:hidden}
+    .flake{position:absolute;top:-18px;left:var(--left);width:var(--size);height:var(--size);background:#fff;border-radius:50%;opacity:var(--alpha);filter:blur(var(--blur));animation:snowfall var(--time) linear infinite;animation-delay:var(--delay)}
+    @keyframes snowfall{from{transform:translate3d(0,-5vh,0)}to{transform:translate3d(var(--drift),112vh,0)}}
+    .confetti{position:fixed;inset:0;pointer-events:none;z-index:20;overflow:hidden}
+    .confetti-piece{position:absolute;top:43%;left:50%;background:var(--color);width:var(--w);height:var(--h);border-radius:2px;opacity:0;animation:celebrate 1650ms cubic-bezier(.14,.6,.31,1) forwards;animation-delay:var(--delay)}
+    @keyframes celebrate{0%{opacity:0;transform:translate(0,0) rotate(0) scale(.5)}9%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translate(var(--tx),var(--ty)) rotate(var(--rotate)) scale(.85)}}
+    .page-shell{position:relative;isolation:isolate;z-index:1;min-height:100svh;display:flex;align-items:center;justify-content:center;padding:42px 18px 50px}
+    .ambient-star{position:fixed;z-index:0;color:#e7c88f;opacity:.75;pointer-events:none;font-family:Georgia,serif}
+    .ambient-star.a{left:8%;top:24%;font-size:22px;animation:twinkle 4s ease-in-out infinite}
+    .ambient-star.b{right:9%;top:11%;font-size:17px;animation:twinkle 3.2s ease-in-out infinite 1s}
+    .ambient-star.c{right:13%;bottom:15%;font-size:24px;animation:twinkle 4.6s ease-in-out infinite .8s}
+    @keyframes twinkle{0%,100%{opacity:.35;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+    .pine{position:fixed;pointer-events:none;width:min(290px,30vw);z-index:0;opacity:.77;filter:drop-shadow(0 12px 20px rgba(0,0,0,.2))}
+    .pine.left{left:-35px;top:-40px;transform:rotate(-10deg)}
+    .pine.right{right:-60px;bottom:-35px;transform:rotate(165deg)}
+    .card{
+      width:min(100%,840px);position:relative;overflow:hidden;border-radius:19px;
+      background:var(--cream);box-shadow:0 33px 85px rgba(0,0,0,.36),0 2px 0 rgba(255,255,255,.15);
+      border:1px solid rgba(236,205,161,.7);
+    }
+    .card::before{content:"";position:absolute;inset:11px;pointer-events:none;border:1px solid rgba(185,135,72,.25);border-radius:10px;z-index:1}
+    .card::after{content:"";position:absolute;top:0;left:0;right:0;height:7px;background:repeating-linear-gradient(110deg,var(--forest) 0 23px,var(--cream) 23px 46px,var(--red) 46px 69px,var(--cream) 69px 92px);opacity:.85}
+    .topline{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:29px 43px 0;font-size:10px;line-height:1.35;letter-spacing:.22em;font-weight:750;color:#786c60;text-transform:uppercase}
+    .topline .star{color:var(--red);font-size:18px;line-height:1;letter-spacing:0}
+    .intro{text-align:center;padding:23px 55px 52px;animation:rise .5s ease-out both}
+    .seal{position:relative;width:85px;height:85px;margin:0 auto 18px;display:grid;place-items:center}
+    .seal::before,.seal::after{content:"";position:absolute;inset:5px;border:1px solid #dfcaa6;border-radius:50%}
+    .seal::after{inset:12px;border-style:dashed;opacity:.85}
+    .seal svg{width:44px;height:44px;fill:none;stroke:#b14c55;stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+    .eyebrow{margin:0 0 14px;text-transform:uppercase;letter-spacing:.26em;font-weight:750;color:var(--red);font-size:11px}
+    h1,h2,p{margin-top:0}
+    .intro h1,.reveal h1{font-family:Georgia,"Times New Roman",serif;letter-spacing:-.048em;font-weight:normal}
+    .intro h1{font-size:clamp(36px,5.3vw,61px);line-height:1.12;margin:0 auto 18px;max-width:650px}
+    .intro h1 em{color:var(--red);font-weight:normal}
+    .intro .lead{font-size:clamp(14px,2.05vw,17px);line-height:1.75;max-width:500px;margin:0 auto 12px;color:#66717b}
+    .gift-button{margin:8px auto 2px;position:relative;display:block;width:240px;height:215px;border:0;background:transparent;cursor:pointer;-webkit-tap-highlight-color:transparent}
+    .gift-button:focus-visible{border-radius:30px}
+    .gift-shadow{position:absolute;left:30px;right:30px;bottom:18px;height:16px;background:rgba(45,41,37,.18);filter:blur(11px);border-radius:50%;transition:transform .35s}
+    .gift-base{position:absolute;left:37px;top:84px;width:167px;height:114px;border-radius:5px 5px 11px 11px;background:linear-gradient(110deg,#b8404a,#922d3b 62%,#752c37);box-shadow:inset 5px 0 8px #cf5860,7px 13px 16px rgba(64,31,34,.21);transition:transform .7s ease,opacity .5s}
+    .gift-base::after{content:"";position:absolute;top:0;bottom:0;left:72px;width:27px;background:linear-gradient(90deg,#e6c28a,#f9e3b8 45%,#d1a35e)}
+    .gift-lid{position:absolute;left:26px;top:65px;width:189px;height:36px;border-radius:5px;background:linear-gradient(105deg,#d0585f,#b13845 66%,#a03242);box-shadow:0 6px 8px rgba(80,36,39,.25);z-index:3;transition:transform .7s cubic-bezier(.16,1,.3,1),opacity .6s}
+    .gift-lid::after{content:"";position:absolute;top:0;bottom:0;left:83px;width:27px;background:linear-gradient(90deg,#e6c28a,#f9e3b8 45%,#d1a35e)}
+    .gift-knot{position:absolute;z-index:5;top:50px;left:110px;width:22px;height:21px;border-radius:50%;background:#f4d5a2;box-shadow:inset -3px -3px 3px #d6a663;transition:transform .7s}
+    .gift-bow{position:absolute;z-index:4;left:111px;top:22px;width:1px;height:1px;transition:transform .7s}
+    .gift-bow::before,.gift-bow::after{content:"";position:absolute;top:0;width:62px;height:34px;border:9px solid #efcf97;border-radius:60% 15% 60% 20%;box-shadow:0 2px 3px rgba(63,47,27,.12)}
+    .gift-bow::before{right:-2px;transform:rotate(27deg)}
+    .gift-bow::after{left:10px;border-radius:15% 60% 20% 60%;transform:rotate(-24deg)}
+    .gift-tag{position:absolute;z-index:4;right:5px;top:106px;padding:9px 10px 8px;border-radius:3px;background:#fff6df;color:#9b4a4b;font-family:Georgia,serif;font-style:italic;font-size:13px;box-shadow:0 3px 7px #0002;transform:rotate(-9deg);transition:transform .35s}
+    .gift-tag::before{content:"";position:absolute;width:24px;height:1px;background:#d8c18f;left:-22px;top:7px;transform:rotate(-30deg)}
+    .gift-button:hover .gift-lid,.gift-button:focus-visible .gift-lid{transform:translateY(-6px)}
+    .gift-button:hover .gift-shadow,.gift-button:focus-visible .gift-shadow{transform:scale(1.1)}
+    .gift-button:hover .gift-tag{transform:rotate(0)}
+    .gift-button.unwrapping .gift-lid{transform:translate(-15px,-110px) rotate(-15deg);opacity:0}
+    .gift-button.unwrapping .gift-bow,.gift-button.unwrapping .gift-knot{transform:translate(-10px,-110px) rotate(-18deg);opacity:0}
+    .gift-button.unwrapping .gift-base{transform:scale(.84) translateY(14px);opacity:0}
+    .cta{display:inline-flex;align-items:center;justify-content:center;gap:12px;padding:16px 31px;min-height:55px;background:var(--red);color:#fffaf0;border:1px solid #8c3341;border-radius:100px;letter-spacing:.075em;text-transform:uppercase;font-weight:750;font-size:12px;cursor:pointer;box-shadow:0 9px 20px rgba(129,46,58,.22);transition:transform .2s,box-shadow .2s,background .2s}
+    .cta:hover{transform:translateY(-2px);background:#8d2c3a;box-shadow:0 12px 23px rgba(129,46,58,.25)}
+    .cta svg{height:18px;width:18px;stroke:currentColor;fill:none;stroke-width:1.8}
+    .hint{margin:17px auto 0;font-family:Georgia,serif;font-style:italic;color:#938477;font-size:14px}
+    .footline{display:flex;align-items:center;justify-content:center;gap:12px;letter-spacing:.19em;font-size:10px;font-weight:700;text-transform:uppercase;color:#a9967e;padding:0 20px 30px}
+    .footline span{height:1px;width:29px;background:#d9c7ae}
+    .reveal{padding:0 0 38px;text-align:center;animation:rise .72s cubic-bezier(.2,.75,.25,1) both}
+    @keyframes rise{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+    .reveal .headline{padding:33px 35px 8px}
+    .reveal .eyebrow{font-size:10px;letter-spacing:.25em;margin-bottom:10px}
+    .reveal h1{font-size:clamp(40px,6.1vw,71px);line-height:1.04;margin:0 auto 13px;max-width:690px}
+    .reveal h1 strong{display:block;font-weight:normal;font-size:clamp(69px,11.7vw,124px);letter-spacing:-.072em;line-height:.97;color:var(--red);text-shadow:1px 1px 0 rgba(249,255,247,.7)}
+    .reveal .subheading{max-width:580px;margin:0 auto 22px;color:#65717b;line-height:1.7;font-size:15px}
+    .postcard{position:relative;margin:0 35px;border:6px solid #fff;border-radius:10px;box-shadow:0 9px 24px rgba(42,47,46,.11);overflow:hidden;background:#182d44}
+    .postcard svg{display:block;width:100%;height:auto;max-height:410px}
+    .postcard-label{position:absolute;left:20px;bottom:19px;padding:8px 11px;letter-spacing:.19em;text-transform:uppercase;color:#fff8e6;background:rgba(20,41,55,.62);border:1px solid rgba(242,226,194,.38);backdrop-filter:blur(4px);font-size:10px;font-weight:700;border-radius:3px}
+    .trip-line{display:flex;align-items:center;justify-content:center;gap:14px;margin:26px auto 19px;color:#ae8560;font-size:11px;letter-spacing:.17em;text-transform:uppercase;font-weight:750}
+    .trip-line::before,.trip-line::after{content:"";display:block;width:48px;height:1px;background:#d9c2a3}
+    .ticket{position:relative;margin:0 46px 29px;padding:20px 26px 26px;background:#fbf2e3;border:1px solid #dfcba8;border-radius:11px;text-align:left;box-shadow:0 8px 18px rgba(94,60,34,.05)}
+    .ticket::before,.ticket::after{content:"";position:absolute;top:54%;height:22px;width:13px;background:var(--cream);border:1px solid #dfcba8}
+    .ticket::before{left:-1px;border-left:0;border-radius:0 12px 12px 0}
+    .ticket::after{right:-1px;border-right:0;border-radius:12px 0 0 12px}
+    .ticket-head{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px dashed #d9b991;padding-bottom:13px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;font-weight:800;color:#9a5550}
+    .ticket-head .ticket-heart{letter-spacing:0;font-size:19px;line-height:1;color:#b24c55}
+    .ticket-fields{display:grid;grid-template-columns:1.08fr .8fr 1fr;gap:13px;padding-top:21px}
+    .field-label{margin:0 0 5px;color:#a09280;font-size:10px;letter-spacing:.14em;font-weight:750;text-transform:uppercase}
+    .field-value{color:#314559;font-family:Georgia,serif;font-size:clamp(16px,2.8vw,23px);line-height:1.3}
+    .letter{padding:0 55px}
+    .letter p{max-width:550px;margin:0 auto 14px;font:italic clamp(18px,2.7vw,23px)/1.57 Georgia,"Times New Roman",serif;color:#405367}
+    .signature{font:italic 21px Georgia,serif;color:var(--red);margin-bottom:26px}
+    .replay{border:0;background:transparent;color:#6e7681;font-size:11px;letter-spacing:.11em;text-transform:uppercase;text-decoration:underline;text-decoration-color:#bdab94;text-underline-offset:5px;padding:9px;cursor:pointer}
+    .replay:hover{color:var(--red)}
+    .sr-only{position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden}
+    @media(min-width:900px){.card{transform:translateZ(0)}}
+    @media(max-width:600px){
+      .page-shell{padding:18px 12px 25px;align-items:flex-start}
+      .pine{width:170px;opacity:.6}.pine.left{left:-65px;top:-40px}.pine.right{right:-75px;bottom:-50px}
+      .card{border-radius:13px}.card::before{inset:8px;border-radius:7px}
+      .topline{padding:26px 23px 0;font-size:8px;letter-spacing:.15em}
+      .intro{padding:25px 24px 43px}.seal{width:74px;height:74px;margin-bottom:15px}
+      .eyebrow{font-size:9px;letter-spacing:.18em;margin-bottom:13px}
+      .intro h1{font-size:clamp(34px,9.6vw,46px);line-height:1.14;margin-bottom:16px}
+      .intro .lead{font-size:14px;line-height:1.65}
+      .gift-button{margin-top:9px;margin-bottom:0;transform:scale(.91);transform-origin:50% 50%;height:200px}
+      .cta{font-size:11px;min-height:53px;padding:15px 23px}
+      .footline{font-size:9px;padding-bottom:25px}
+      .reveal{padding-bottom:29px}.reveal .headline{padding:32px 20px 8px}
+      .reveal h1{font-size:clamp(38px,10vw,53px);margin-bottom:13px}.reveal h1 strong{font-size:clamp(65px,18.8vw,92px)}
+      .reveal .subheading{font-size:13px;line-height:1.65;margin:0 auto 17px;padding:0 4px}
+      .postcard{margin:0 16px;border-width:4px;border-radius:8px}
+      .postcard-label{font-size:8px;left:10px;bottom:10px;padding:6px 7px}
+      .trip-line{font-size:9px;gap:10px;margin:22px auto 16px}.trip-line::before,.trip-line::after{width:24px}
+      .ticket{margin:0 20px 26px;padding:18px 18px 22px}
+      .ticket-head{font-size:9px;letter-spacing:.105em}
+      .ticket-fields{grid-template-columns:1fr 1fr;gap:17px 10px;padding-top:17px}
+      .ticket-fields > div:last-child{grid-column:1/-1;border-top:1px solid #ebd9c1;padding-top:14px}
+      .field-value{font-size:19px}.letter{padding:0 22px}.letter p{font-size:19px}.signature{font-size:19px;margin-bottom:20px}
+    }
+    @media(max-width:360px){
+      .intro{padding-left:17px;padding-right:17px}.intro h1{font-size:32px}
+      .reveal h1 strong{font-size:61px}.postcard-label{letter-spacing:.1em}
+      .ticket-head{font-size:8px}.topline{font-size:7px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      html{scroll-behavior:auto}*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
+      .snow,.confetti{display:none}
+    }
+  </style>
+</head>
+<body>
+  <div class="snow" id="snow" aria-hidden="true"></div>
+  <div class="confetti" id="confetti" aria-hidden="true"></div>
+  <span class="ambient-star a" aria-hidden="true">✧</span><span class="ambient-star b" aria-hidden="true">✦</span><span class="ambient-star c" aria-hidden="true">✧</span>
+  <svg class="pine left" viewBox="0 0 290 265" aria-hidden="true">
+    <g fill="none" stroke-linecap="round"><path d="M-30 0Q96 101 273 169" stroke="#967e59" stroke-width="7"/>
+    <g stroke="#2b5747" stroke-width="8">
+      <path d="M36 39l-4 53M36 39l53 6M60 58l-7 61M60 58l66-5M86 75l-5 78M86 75l65-12M114 91l-2 84M114 91l67-19M145 110l-1 77M145 110l71-14M173 126l8 68M173 126l68-6M202 143l16 61M202 143l60-3"/>
+    </g><g stroke="#40705c" stroke-width="4">
+      <path d="M19 30l-12 43M56 51l37-16M94 78l-29 57M121 90l39-38M149 111l-23 64M174 121l41-33M205 145l-12 58"/>
+    </g></g>
+    <g fill="#b9494b"><circle cx="99" cy="121" r="8"/><circle cx="111" cy="129" r="8"/><circle cx="107" cy="113" r="8"/><circle cx="203" cy="176" r="7"/><circle cx="215" cy="181" r="7"/></g>
+    <g fill="#d5aa68"><circle cx="147" cy="71" r="4"/><circle cx="253" cy="151" r="3"/></g>
+  </svg>
+  <svg class="pine right" viewBox="0 0 290 265" aria-hidden="true">
+    <g fill="none" stroke-linecap="round"><path d="M-30 0Q96 101 273 169" stroke="#967e59" stroke-width="7"/>
+    <g stroke="#2b5747" stroke-width="8"><path d="M36 39l-4 53M36 39l53 6M60 58l-7 61M60 58l66-5M86 75l-5 78M86 75l65-12M114 91l-2 84M114 91l67-19M145 110l-1 77M145 110l71-14M173 126l8 68M173 126l68-6M202 143l16 61M202 143l60-3"/></g>
+    <g stroke="#40705c" stroke-width="4"><path d="M19 30l-12 43M56 51l37-16M94 78l-29 57M121 90l39-38M149 111l-23 64M174 121l41-33M205 145l-12 58"/></g></g>
+    <g fill="#b9494b"><circle cx="99" cy="121" r="8"/><circle cx="111" cy="129" r="8"/><circle cx="107" cy="113" r="8"/><circle cx="203" cy="176" r="7"/><circle cx="215" cy="181" r="7"/></g>
+  </svg>
+
+  <main class="page-shell">
+    <article class="card" aria-label="Un regalo di Natale speciale">
+      <header class="topline"><span>Una piccola magia di Natale</span></header>
+
+      <section class="intro" id="intro" aria-labelledby="intro-title">
+        <div class="seal" aria-hidden="true">
+          <svg viewBox="0 0 48 48"><path d="M24 40S7 29 7 18a9.5 9.5 0 0 1 17-6 9.5 9.5 0 0 1 17 6C41 29 24 40 24 40Z"/><path d="M24 2v5M4 8l3 4M44 8l-3 4M1 24h5M42 24h5"/></svg>
+        </div>
+        <p class="eyebrow">Per te, amore mio ♡</p>
+        <h1 id="intro-title">Pensavi fosse tutto qui? <em><br>C'è ancora qualcosa...</em></h1>
+
+        <button class="gift-button" id="giftButton" type="button" aria-label="Apri il pacchetto e scopri il regalo">
+          <span class="gift-shadow"></span><span class="gift-base"></span><span class="gift-lid"></span><span class="gift-bow"></span><span class="gift-knot"></span><span class="gift-tag">Per te ♡</span>
+        </button>
+        <button class="cta" id="openButton" type="button">
+          Scarta il tuo regalo
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg>
+        </button>
+        <p class="hint">La parte più bella deve ancora arrivare.</p>
+      </section>
+
+      <section class="reveal" id="reveal" aria-labelledby="reveal-title" hidden>
+        <div class="headline">
+          <p class="eyebrow">Il tuo regalo di Natale è...</p>
+          <h1 id="reveal-title">Un weekend a <strong>Praga!</strong></h1>
+        </div>
+        <div class="postcard" role="img" aria-label="Illustrazione natalizia di Praga di sera, con le sue torri, il Castello, il Ponte Carlo e la neve">
+          <svg viewBox="0 0 1080 540" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <defs>
+              <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2e50"/><stop offset=".62" stop-color="#52617a"/><stop offset="1" stop-color="#b28d82"/></linearGradient>
+              <radialGradient id="moonlight"><stop stop-color="#f8e3b3" stop-opacity=".42"/><stop offset="1" stop-color="#f8e3b3" stop-opacity="0"/></radialGradient>
+              <linearGradient id="river" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#4e667a"/><stop offset="1" stop-color="#1d3a52"/></linearGradient>
+              <linearGradient id="building" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#d9a382"/><stop offset="1" stop-color="#8f6370"/></linearGradient>
+              <linearGradient id="brick" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#9e8591"/><stop offset="1" stop-color="#46566a"/></linearGradient>
+              <filter id="soft-glow" x="-70%" y="-70%" width="240%" height="240%"><feGaussianBlur stdDeviation="5"/></filter>
+              <pattern id="windows" width="28" height="30" patternUnits="userSpaceOnUse"><rect x="10" y="10" width="6" height="11" rx="1" fill="#ffce85" opacity=".86"/></pattern>
+              <pattern id="waterlines" width="95" height="20" patternUnits="userSpaceOnUse"><path d="M4 6h42M54 15h29" stroke="#c0bdad" stroke-opacity=".18" stroke-width="2"/></pattern>
+            </defs>
+            <rect width="1080" height="540" fill="url(#sky)"/>
+            <circle cx="830" cy="104" r="118" fill="url(#moonlight)"/><circle cx="830" cy="104" r="37" fill="#fff1c9"/><circle cx="820" cy="95" r="38" fill="#fff9e0" opacity=".25" filter="url(#soft-glow)"/>
+            <g fill="#fff2d4" opacity=".91"><circle cx="98" cy="47" r="2"/><circle cx="161" cy="111" r="2"/><circle cx="277" cy="43" r="1.8"/><circle cx="321" cy="101" r="1.4"/><circle cx="480" cy="52" r="1.6"/><circle cx="599" cy="92" r="2"/><circle cx="701" cy="41" r="1.7"/><circle cx="912" cy="45" r="2"/><circle cx="972" cy="124" r="1.7"/><circle cx="1042" cy="70" r="2"/></g>
+            <path d="M95 121v14m-7-7h14M716 92v16m-8-8h16M956 189v12m-6-6h12" stroke="#fae5b9" stroke-width="2" stroke-linecap="round" opacity=".85"/>
+            <path d="M0 322Q180 276 328 286T599 269T853 269T1080 291V434H0Z" fill="#5c6473" opacity=".45"/>
+            <path d="M0 348Q170 300 352 319T708 302T1080 307V422H0Z" fill="#364a61" opacity=".65"/>
+            <!-- Prague Castle and its Gothic towers -->
+            <g>
+              <path d="M425 300V224h360v78Z" fill="#a58b8f"/><path d="M421 222h368l-13-16H434Z" fill="#ecdfd5"/>
+              <rect x="455" y="192" width="40" height="110" fill="#aab1b5"/><path d="M450 194l25-55 25 55Z" fill="#41495f"/><path d="M475 121v21" stroke="#e7cfab" stroke-width="3"/>
+              <rect x="720" y="182" width="36" height="121" fill="#aca8ae"/><path d="M714 183l24-57 24 57Z" fill="#394558"/><path d="M738 115v17" stroke="#e7cfab" stroke-width="3"/>
+              <path d="M546 303V180h106v123" fill="#adb0b5"/><path d="M535 182l64-35 64 35Z" fill="#4c5262" stroke="#f2e0cf" stroke-width="5" stroke-linejoin="round"/>
+              <rect x="568" y="151" width="16" height="151" fill="#b7b5b5"/><path d="M564 153l12-83 12 83Z" fill="#343d56"/><path d="M576 62v18" stroke="#efdfb9" stroke-width="3"/>
+              <rect x="617" y="140" width="18" height="163" fill="#a5a4a9"/><path d="M612 144l14-91 14 91Z" fill="#343d56"/><path d="M626 43v20" stroke="#efdfb9" stroke-width="3"/>
+              <path d="M594 205l10-32 10 32v54h-20Z" fill="#6f6b75"/><path d="M593 203l11-26 11 26" fill="none" stroke="#d8c5ad" stroke-width="2"/>
+              <path d="M567 240v-25q7-20 14 0v25M622 228v-25q7-20 14 0v25" fill="#eed19a"/>
+              <rect x="435" y="241" width="335" height="61" fill="url(#windows)" opacity=".8"/>
+              <path d="M412 303h380" stroke="#f1e2cc" stroke-width="5"/>
+            </g>
+            <!-- Town rooftops -->
+            <g>
+              <path d="M0 365v-53l43-27 53 27v53Z" fill="#aa7981"/><path d="M0 313l46-35 53 35" stroke="#f4e9de" stroke-width="9" fill="none"/>
+              <rect x="88" y="305" width="84" height="69" fill="#bb8b87"/><path d="M83 309l47-42 48 42Z" fill="#4d5b6b" stroke="#f3e6d7" stroke-width="5"/>
+              <rect x="166" y="322" width="93" height="58" fill="#9d7b85"/><path d="M162 325l50-34 51 34Z" fill="#596173" stroke="#f0e1d5" stroke-width="5"/>
+              <rect x="252" y="293" width="77" height="89" fill="#d0a18b"/><path d="M248 295l43-39 43 39Z" fill="#6c6572" stroke="#f2e5d7" stroke-width="5"/>
+              <rect x="314" y="330" width="80" height="58" fill="#b88280"/><path d="M310 334l43-36 45 36Z" fill="#3f556b" stroke="#f1e3d6" stroke-width="6"/>
+              <rect x="730" y="317" width="89" height="78" fill="#b8847e"/><path d="M725 321l51-37 48 37Z" fill="#4c586b" stroke="#f2e1d4" stroke-width="6"/>
+              <rect x="814" y="293" width="69" height="102" fill="#a48b91"/><path d="M808 298l40-45 42 45Z" fill="#43556b" stroke="#f3e6d7" stroke-width="6"/>
+              <rect x="878" y="313" width="92" height="82" fill="#c29786"/><path d="M874 316l50-38 50 38Z" fill="#59606b" stroke="#f2e6d8" stroke-width="6"/>
+              <rect x="958" y="299" width="122" height="97" fill="#ab8584"/><path d="M953 303l66-40 66 40Z" fill="#536277" stroke="#f6e7db" stroke-width="6"/>
+            </g>
+            <!-- Tyn and Old Town towers -->
+            <g>
+              <rect x="310" y="249" width="34" height="136" fill="#897f86"/><path d="M303 251l24-89 24 89Z" fill="#36465c"/><path d="M327 145v25" stroke="#f1d6a4" stroke-width="3"/>
+              <rect x="380" y="243" width="34" height="143" fill="#7d7984"/><path d="M373 246l24-89 24 89Z" fill="#36465c"/><path d="M397 142v27" stroke="#f1d6a4" stroke-width="3"/>
+              <path d="M343 385V279l38-21v127Z" fill="#a3898c"/><path d="M341 282l22-23 20 23Z" fill="#424d62"/>
+              <rect x="321" y="270" width="7" height="19" fill="#f2d19a"/><rect x="391" y="265" width="7" height="19" fill="#f2d19a"/>
+              <rect x="169" y="231" width="69" height="165" fill="#96848d"/><path d="M164 233l40-50 39 50Z" fill="#49566a" stroke="#f1e2d2" stroke-width="4"/>
+              <path d="M201 172v20" stroke="#ebd2a7" stroke-width="3"/>
+              <circle cx="204" cy="264" r="20" fill="#d3bb9f"/><circle cx="204" cy="264" r="16" fill="#354a5d" stroke="#f1d6a3" stroke-width="2"/><path d="M204 250v15l11 8" stroke="#fff0c9" stroke-width="2" fill="none"/>
+              <path d="M186 340v-20q18-26 36 0v20" fill="#504d59"/>
+            </g>
+            <!-- lighted windows -->
+            <g fill="url(#windows)" opacity=".9"><path d="M0 315h175v54H0ZM249 295h66v81h-66ZM412 322h93v65h-93ZM736 325h80v70h-80ZM871 319h98v74h-98ZM968 311h112v82H968Z"/></g>
+            <rect y="391" width="1080" height="149" fill="url(#river)"/>
+            <rect y="391" width="1080" height="149" fill="url(#waterlines)"/>
+            <g opacity=".39" stroke="#e9bd7e" stroke-linecap="round"><path d="M115 431h31m-44 15h54m-46 15h23M224 431h60m-49 22h41M432 430h35m-53 21h54m-37 20h60M588 423h41m-23 22h65m-39 23h42M781 436h52m-38 21h79m-48 21h28M930 428h60m-37 20h35" stroke-width="4"/></g>
+            <!-- Charles Bridge with six arches -->
+            <path d="M0 381Q540 349 1080 381V403Q540 380 0 403Z" fill="#8d8381" stroke="#e9d3bf" stroke-width="5"/>
+            <path d="M0 405h1080v77H0Z" fill="#897e80"/>
+            <g fill="#26465c">
+              <path d="M29 480v-36q43-61 86 0v36Z"/><path d="M197 480v-36q43-61 86 0v36Z"/><path d="M365 480v-36q43-61 86 0v36Z"/>
+              <path d="M533 480v-36q43-61 86 0v36Z"/><path d="M701 480v-36q43-61 86 0v36Z"/><path d="M869 480v-36q43-61 86 0v36Z"/>
+            </g>
+            <path d="M0 480h1080v8H0Z" fill="#726c73"/>
+            <g fill="#d9bba1"><rect x="68" y="370" width="10" height="41"/><rect x="240" y="360" width="9" height="53"/><rect x="415" y="357" width="9" height="53"/><rect x="589" y="357" width="9" height="53"/><rect x="766" y="363" width="9" height="53"/><rect x="944" y="373" width="9" height="44"/></g>
+            <g fill="#fbdba2"><circle cx="73" cy="367" r="6"/><circle cx="244" cy="357" r="6"/><circle cx="420" cy="354" r="6"/><circle cx="594" cy="354" r="6"/><circle cx="771" cy="360" r="6"/><circle cx="949" cy="370" r="6"/></g>
+            <g fill="#fbe1ad" opacity=".42" filter="url(#soft-glow)"><circle cx="73" cy="367" r="11"/><circle cx="244" cy="357" r="11"/><circle cx="420" cy="354" r="11"/><circle cx="594" cy="354" r="11"/><circle cx="771" cy="360" r="11"/><circle cx="949" cy="370" r="11"/></g>
+            <!-- Trees at front -->
+            <g><path d="M0 450l42-105 41 105H63l24 41H0Z" fill="#1a4946"/><path d="M14 416l28-71 27 71Z" fill="#246153"/><path d="M20 410l22-65 23 65" stroke="#dee5d8" stroke-width="5" fill="none"/><circle cx="34" cy="420" r="4" fill="#edb76f"/><circle cx="51" cy="397" r="4" fill="#da5d61"/><circle cx="27" cy="442" r="4" fill="#edb76f"/>
+            <path d="M990 465l45-128 45 128h-20l20 40h-90Z" fill="#174847"/><path d="M1007 424l28-87 28 87Z" fill="#246153"/><path d="M1012 417l23-77 25 77" stroke="#dee5d8" stroke-width="5" fill="none"/><circle cx="1037" cy="391" r="4" fill="#f3cc83"/><circle cx="1025" cy="424" r="4" fill="#ce6662"/><circle cx="1058" cy="447" r="4" fill="#edb76f"/></g>
+            <g fill="#fff4e4" opacity=".82"><circle cx="31" cy="188" r="2.5"/><circle cx="135" cy="163" r="3"/><circle cx="262" cy="216" r="2"/><circle cx="352" cy="125" r="2.6"/><circle cx="449" cy="113" r="2"/><circle cx="528" cy="57" r="2.2"/><circle cx="674" cy="177" r="3"/><circle cx="779" cy="208" r="2"/><circle cx="916" cy="148" r="2.5"/><circle cx="1011" cy="234" r="3"/><circle cx="57" cy="277" r="3"/><circle cx="867" cy="260" r="2"/></g>
+            <path d="M0 513q55-6 112 0t112 0t112 0t112 0t112 0t112 0t112 0t112 0t112 0" fill="none" stroke="#d2bbad" stroke-opacity=".19" stroke-width="3"/>
+          </svg>
+          <span class="postcard-label">Praga · Repubblica Ceca</span>
+        </div>
+        <div class="trip-line">La nostra prossima avventura ✦</div>
+        <div class="ticket" aria-label="Il nostro biglietto simbolico per il viaggio">
+          <div class="ticket-head"><span>Biglietto per due cuori in viaggio</span><span class="ticket-heart">♡</span></div>
+          <div class="ticket-fields">
+            <div><p class="field-label">Destinazione</p><div class="field-value">Praga</div></div>
+            <div><p class="field-label">Viaggiatori</p><div class="field-value">Io & Te</div></div>
+            <div><p class="field-label">Quando</p><div class="field-value">04/02 - 07/02</div></div>
+          </div>
+        </div>
+        <div class="letter">
+          <p>P.S. stavolta l'hotel l'ho scelto bene (spero).</p>
+          <div class="signature">Buon Natale, amore mio. ♡</div>
+          <button type="button" class="replay" id="replayButton">↺ Rivivi la sorpresa</button>
+        </div>
+      </section>
+      <footer class="footline"><span></span>♡ Mela & Manu ♡<span></span></footer>
+    </article>
+  </main>
+  <div class="sr-only" id="announcement" aria-live="polite" aria-atomic="true"></div>
+  <script>
+    (() => {
+      'use strict';
+      const intro = document.getElementById('intro');
+      const reveal = document.getElementById('reveal');
+      const giftButton = document.getElementById('giftButton');
+      const openButton = document.getElementById('openButton');
+      const replayButton = document.getElementById('replayButton');
+      const announcement = document.getElementById('announcement');
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      let busy = false;
+      let timer = null;
+
+      // Nevicata leggera, senza immagini o librerie esterne.
+      if (!prefersReducedMotion) {
+        const snow = document.getElementById('snow');
+        for (let i = 0; i < 42; i++) {
+          const flake = document.createElement('i');
+          flake.className = 'flake';
+          flake.style.setProperty('--left', (Math.random() * 100).toFixed(2) + '%');
+          flake.style.setProperty('--size', (1.7 + Math.random() * 3.4).toFixed(1) + 'px');
+          flake.style.setProperty('--alpha', (.18 + Math.random() * .52).toFixed(2));
+          flake.style.setProperty('--blur', (Math.random() < .25 ? '1px' : '0px'));
+          flake.style.setProperty('--time', (11 + Math.random() * 18).toFixed(1) + 's');
+          flake.style.setProperty('--delay', (-Math.random() * 29).toFixed(1) + 's');
+          flake.style.setProperty('--drift', ((Math.random() - .5) * 130).toFixed(1) + 'px');
+          snow.appendChild(flake);
+        }
+      }
+
+      function celebrate() {
+        if (prefersReducedMotion) return;
+        const container = document.getElementById('confetti');
+        container.replaceChildren();
+        const colors = ['#e8c180','#f5e9cc','#b34451','#3e7562','#fff8e8'];
+        for (let i = 0; i < 62; i++) {
+          const part = document.createElement('span');
+          const angle = (i / 62) * Math.PI * 2 + (Math.random() - .5) * .3;
+          const distance = 115 + Math.random() * 420;
+          part.className = 'confetti-piece';
+          part.style.setProperty('--color', colors[i % colors.length]);
+          part.style.setProperty('--w', (4 + Math.random() * 5).toFixed(1) + 'px');
+          part.style.setProperty('--h', (8 + Math.random() * 10).toFixed(1) + 'px');
+          part.style.setProperty('--tx', (Math.cos(angle) * distance).toFixed(0) + 'px');
+          part.style.setProperty('--ty', (Math.sin(angle) * distance + 160).toFixed(0) + 'px');
+          part.style.setProperty('--rotate', (Math.random() * 980 - 490).toFixed(0) + 'deg');
+          part.style.setProperty('--delay', (Math.random() * 170).toFixed(0) + 'ms');
+          container.appendChild(part);
+        }
+        window.setTimeout(() => container.replaceChildren(), 2200);
+      }
+
+      function openGift() {
+        if (busy || intro.hidden) return;
+        busy = true;
+        giftButton.classList.add('unwrapping');
+        giftButton.disabled = true;
+        openButton.disabled = true;
+        timer = window.setTimeout(() => {
+          intro.hidden = true;
+          reveal.hidden = false;
+          window.scrollTo({top: 0, behavior: 'auto'});
+          celebrate();
+          announcement.textContent = 'Sorpresa! Il regalo è un viaggio a Praga, insieme!';
+          document.title = 'Si parte per Praga! ❤️';
+          document.getElementById('reveal-title').setAttribute('tabindex', '-1');
+          document.getElementById('reveal-title').focus({preventScroll:true});
+          busy = false;
+        }, prefersReducedMotion ? 0 : 680);
+      }
+
+      function replay() {
+        if (timer) window.clearTimeout(timer);
+        intro.hidden = false;
+        reveal.hidden = true;
+        giftButton.classList.remove('unwrapping');
+        giftButton.disabled = false;
+        openButton.disabled = false;
+        document.title = "Una sorpresa sotto l'albero ✨";
+        announcement.textContent = '';
+        window.scrollTo({top:0, behavior:'smooth'});
+        busy = false;
+        openButton.focus({preventScroll:true});
+      }
+      giftButton.addEventListener('click', openGift);
+      openButton.addEventListener('click', openGift);
+      replayButton.addEventListener('click', replay);
+    })();
+  </script>
+</body>
+</html>
